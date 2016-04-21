@@ -5,9 +5,9 @@ import {List, Map} from "immutable";
 * Allow iterable js objects and cast as an immutable list. 
 *
 * @method setEntries
-* @param state {Map} The state object
-* @param entries {Array} The list of entries to add a state object
-* @return The updated state object
+* @param {Map} state The state object
+* @param {Array} entries The list of entries to add a state object
+* @return {Map} The updated state object
 */ 
 export function setEntries(state, entries) {
     return state.set("entries", List(entries));
@@ -19,7 +19,7 @@ export function setEntries(state, entries) {
 *
 * @method next
 * @param {Map} state The state object
-* @return The updated state object
+* @return {Map} The updated state object
 */
 export function next(state) {
     const entries = state.get("entries");
@@ -32,6 +32,15 @@ export function next(state) {
     });
 }
 
+/**
+* Updates the state object to include a tally of votes associated 
+* with an entry
+*
+* @method vote
+* @param {Map} state The state object
+* @param {String} entry The entry which has been selected in the vote
+* @return {Map} The updated state object
+*/
 export function vote(state, entry) {
     return state.updateIn(
         ["vote", "tally", entry],
